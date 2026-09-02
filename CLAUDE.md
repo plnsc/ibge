@@ -20,7 +20,7 @@ Sempre ative o `.venv` antes de rodar comandos Python diretamente (`python`, `pi
 
 ## Arquitetura
 
-- `main.py` — ponto de entrada; lê o campo `description` de `pyproject.toml` (via `tomllib`) e o imprime.
+- `main.py` — dummy; lê o campo `description` de `pyproject.toml` (via `tomllib`) e imprime.
 - `pyproject.toml` — declara `selenium` e `chromium` como dependências, indicando que a automação de navegador é a abordagem de coleta pretendida para as páginas do IBGE (muitas páginas do IBGE renderizam conteúdo no lado do cliente); também declara `pandas`, usado pelo `identificar_extensoes.py`.
 - `fontes/` — diretório com os dados brutos coletados e seus derivados:
   - `*.html.md` — captura bruta da página (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`); entrada para o `gerar_fontes.py`.
