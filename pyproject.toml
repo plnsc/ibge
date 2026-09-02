@@ -1,0 +1,10 @@
+[project]
+name = "ibge"
+version = "0.1.0"
+description = "Ferramenta para coleta de dados públicos do IBGE."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "chromium>=0.0.0",
+    "selenium>=4.48.0",
+]
