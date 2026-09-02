@@ -4,7 +4,7 @@ Este arquivo fornece orientações para o Claude Code (claude.ai/code) ao trabal
 
 ## Estado do projeto
 
-Este é um projeto em estágio inicial (scaffold) para coletar dados do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. O `main.py` ainda é o placeholder gerado pelo uv. A pasta `fontes/` contém capturas brutas de páginas (HTML envolvido em Markdown com um cabeçalho de frontmatter `url`/`acessado_em`) obtidas de páginas do IBGE, como a página de estimativas de população — esses são dados de referência/coletados, não código-fonte.
+Este é um projeto em estágio inicial (scaffold) para coletar dados do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` contém capturas brutas de páginas (HTML envolvido em Markdown com um cabeçalho de frontmatter `url`/`acessado_em`) obtidas de páginas do IBGE, como a página de estimativas de população — esses são dados de referência/coletados, não código-fonte.
 
 ## Comandos
 
@@ -22,7 +22,9 @@ Sempre ative o `.venv` antes de rodar comandos Python diretamente (`python`, `pi
 
 - `main.py` — ponto de entrada; lê o campo `description` de `pyproject.toml` (via `tomllib`) e o imprime.
 - `pyproject.toml` — declara `selenium` e `chromium` como dependências, indicando que a automação de navegador é a abordagem de coleta pretendida para as páginas do IBGE (muitas páginas do IBGE renderizam conteúdo no lado do cliente).
-- `fontes/` — diretório de saída para o conteúdo coletado das páginas, salvo em arquivos `.html.md` (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`).
+- `fontes/` — diretório com os dados brutos coletados e seus derivados:
+  - `*.html.md` — captura bruta da página (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`); entrada para o `gerar_fontes.py`.
+  - `*.json` / `*.csv` — saídas geradas manualmente a partir do `.html.md` correspondente via `gerar_fontes.py --formato json|csv > fontes/<nome>.<ext>`; não são geradas automaticamente, então podem ficar desatualizadas em relação ao `.html.md` se este for recapturado.
 - `gerar_fontes.py` — lê um arquivo `.html.md` (por padrão, `fontes/estimativas-de-populacao.html.md`, ou o caminho passado como argumento posicional), extrai o HTML do bloco de código, faz o parsing da árvore jsTree (`div#downloadFTP`) usando `html.parser` da stdlib e imprime a árvore de pastas/arquivos no stdout no formato `tree` (padrão), `json` ou `csv` (colunas `caminho`, `nome`, `tipo`, `url`), selecionável via `--formato`. Os nós do jsTree têm `href="#"` (sem link real), então a `url` de download é derivada concatenando `https://ftp.ibge.gov.br/` com o caminho hierárquico do nó — abordagem validada contra os links reais de `Estimativas_2026` presentes na própria página.
 
 ## Execução de scripts
