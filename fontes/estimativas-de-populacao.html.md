@@ -1,6 +1,6 @@
 ---
 url: https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=downloads
-acessado_em: 2026-09-02T
+acessado_em: 2026-09-02
 ---
 
 ```html
