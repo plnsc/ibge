@@ -21,11 +21,13 @@ Sempre ative o `.venv` antes de rodar comandos Python diretamente (`python`, `pi
 ## Arquitetura
 
 - `main.py` — ponto de entrada; lê o campo `description` de `pyproject.toml` (via `tomllib`) e o imprime.
-- `pyproject.toml` — declara `selenium` e `chromium` como dependências, indicando que a automação de navegador é a abordagem de coleta pretendida para as páginas do IBGE (muitas páginas do IBGE renderizam conteúdo no lado do cliente).
+- `pyproject.toml` — declara `selenium` e `chromium` como dependências, indicando que a automação de navegador é a abordagem de coleta pretendida para as páginas do IBGE (muitas páginas do IBGE renderizam conteúdo no lado do cliente); também declara `pandas`, usado pelo `identificar_extensoes.py`.
 - `fontes/` — diretório com os dados brutos coletados e seus derivados:
   - `*.html.md` — captura bruta da página (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`); entrada para o `gerar_fontes.py`.
   - `*.json` / `*.csv` — saídas geradas manualmente a partir do `.html.md` correspondente via `gerar_fontes.py --formato json|csv > fontes/<nome>.<ext>`; não são geradas automaticamente, então podem ficar desatualizadas em relação ao `.html.md` se este for recapturado.
+- `download.py` — lê `fontes/estimativas-de-populacao.csv` (colunas `caminho,nome,tipo,url` geradas pelo `gerar_fontes.py`) e baixa todos os arquivos, replicando a árvore em `downloads/`. Percorre as pastas `Estimativas_de_Populacao/Estimativas_*` de baixo para cima (mais recente primeiro) e os arquivos de cada pasta de cima para baixo; baixa um arquivo por vez, com pausa maior entre pastas e menor entre arquivos (`--pausa-pastas`/`--pausa-arquivos`); pula arquivos já existentes; tenta cada download até 3 vezes e **para a execução** se todas falharem; grava um `.sha256` ao lado de cada arquivo.
 - `gerar_fontes.py` — lê um arquivo `.html.md` (por padrão, `fontes/estimativas-de-populacao.html.md`, ou o caminho passado como argumento posicional), extrai o HTML do bloco de código, faz o parsing da árvore jsTree (`div#downloadFTP`) usando `html.parser` da stdlib e imprime a árvore de pastas/arquivos no stdout no formato `tree` (padrão), `json` ou `csv` (colunas `caminho`, `nome`, `tipo`, `url`), selecionável via `--formato`. Os nós do jsTree têm `href="#"` (sem link real), então a `url` de download é derivada concatenando `https://ftp.ibge.gov.br/` com o caminho hierárquico do nó — abordagem validada contra os links reais de `Estimativas_2026` presentes na própria página.
+- `identificar_extensoes.py` — lê `fontes/estimativas-de-populacao.csv` (ou o caminho passado como argumento posicional) com `pandas` e imprime no stdout a contagem de extensões de arquivo (`.pdf`, `.zip`, etc.), da mais para a menos frequente.
 
 ## Execução de scripts
 
@@ -37,3 +39,11 @@ aguarde a ação do usuário.
 Mantenha este `CLAUDE.md` atualizado com o estado corrente do repositório. Sempre que scripts,
 comandos de execução ou a estrutura de arquivos mudarem, atualize as seções correspondentes acima
 antes de concluir a tarefa.
+
+## Manutenção do README.md
+
+Mantenha o `README.md` atualizado junto com o `CLAUDE.md`. Sempre que um script for criado, renomeado
+ou tiver seu comando/opções de execução alterados, atualize o `README.md` na mesma tarefa: adicione ou
+ajuste a seção correspondente com o comando de execução atualizado. O `README.md` é a documentação
+voltada ao usuário (comandos de execução e fluxos), enquanto o `CLAUDE.md` é o contexto voltado ao
+Claude Code (arquitetura e convenções) — evite duplicar detalhes de implementação no `README.md`.
