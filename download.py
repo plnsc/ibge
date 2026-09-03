@@ -58,11 +58,13 @@ def baixar_arquivo(url: str, destino: Path) -> None:
     destino_parcial = destino.with_suffix(destino.suffix + ".part")
     sha256 = hashlib.sha256()
     try:
-        with urllib.request.urlopen(requisicao, timeout=TIMEOUT_REQUISICAO) as resposta:
-            with destino_parcial.open("wb") as saida:
-                for bloco in iter(lambda: resposta.read(TAMANHO_BLOCO), b""):
-                    saida.write(bloco)
-                    sha256.update(bloco)
+        with (
+            urllib.request.urlopen(requisicao, timeout=TIMEOUT_REQUISICAO) as resposta,
+            destino_parcial.open("wb") as saida,
+        ):
+            for bloco in iter(lambda: resposta.read(TAMANHO_BLOCO), b""):
+                saida.write(bloco)
+                sha256.update(bloco)
     except BaseException:
         destino_parcial.unlink(missing_ok=True)
         raise
