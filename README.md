@@ -44,7 +44,7 @@ python main.py
 python extrair_fontes.py --formato tree   # ou json, csv
 ```
 
-## Atualizar os arquivos `json`/`csv` em `fontes/`
+## Atualizar arquivos em fontes/
 
 Os arquivos `fontes/*.json` e `fontes/*.csv` são derivados do `.html.md` correspondente e **não** são regenerados automaticamente — se o `.html.md` for recapturado, refaça a exportação manualmente:
 
@@ -54,7 +54,7 @@ python extrair_fontes.py fontes/estimativas-de-populacao.html.md --formato json 
 python extrair_fontes.py fontes/estimativas-de-populacao.html.md --formato csv > fontes/estimativas-de-populacao.csv
 ```
 
-## Baixar árvore de arquivos
+## Baixar arquivos em dataset/
 
 `download.py` lê `fontes/estimativas-de-populacao.csv` e baixa todos os arquivos, replicando a árvore de arquivos em `datasets/` (um `.sha256` é gravado ao lado de cada arquivo baixado):
 
