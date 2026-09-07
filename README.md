@@ -2,6 +2,8 @@
 
 Ferramenta para coleta de dados públicos do IBGE.
 
+> **Nota:** este projeto não usa a API SIDRA (https://sidra.ibge.gov.br). A coleta é feita por scraping direto do site do IBGE, reproduzindo a navegação de um visitante humano, como prova de conceito.
+
 ## Execução
 
 ```shell

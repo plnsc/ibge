@@ -6,6 +6,8 @@ Este arquivo fornece orientações para o Claude Code (claude.ai/code) ao trabal
 
 Este é um projeto em estágio inicial (scaffold) para coletar dados do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` contém capturas brutas de páginas (HTML envolvido em Markdown com um cabeçalho de frontmatter `url`/`acessado_em`) obtidas de páginas do IBGE, como a página de estimativas de população — esses são dados de referência/coletados, não código-fonte.
 
+Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br). A abordagem é fazer scraping direto do site do IBGE, reproduzindo a navegação/visualização de um visitante humano, como prova de conceito.
+
 ## Comandos
 
 Este projeto usa o `uv` para gerenciamento de dependências (Python >=3.14, veja `pyproject.toml` / `uv.lock`), mas a execução deve ser feita através do ambiente virtual (`.venv`) já presente no repositório.
