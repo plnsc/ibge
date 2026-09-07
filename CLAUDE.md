@@ -53,3 +53,7 @@ Mantenha este `CLAUDE.md` atualizado: sempre que scripts, comandos ou a estrutur
 ## Manutenção do README.md
 
 Atualize o `README.md` junto com o `CLAUDE.md`: sempre que um script for criado, renomeado ou tiver comando/opções alterados, ajuste a seção correspondente na mesma tarefa. Divisão de papéis: `README.md` é a documentação de uso (comandos e fluxos, voltada ao usuário); `CLAUDE.md` é o contexto de arquitetura e convenções (voltado ao Claude Code) — evite duplicar detalhes de implementação no `README.md`.
+
+## Idioma
+
+Comentários de código, docstrings, textos de interface e mensagens de commit neste repositório estão em português (pt-BR). Siga essa convenção ao editar arquivos existentes.

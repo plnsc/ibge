@@ -8,3 +8,5 @@ dependencies = [
     "chromium>=0.0.0",
     "selenium>=4.48.0",
 ]
+[tool.ruff.format]
+quote-style = "double"
