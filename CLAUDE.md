@@ -27,6 +27,7 @@ Sempre ative o `.venv` antes de rodar comandos Python diretamente (`python`, `pi
 - `main.py` — ponto de entrada; lê o campo `description` de `pyproject.toml` (via `tomllib`) e o imprime.
 - `pyproject.toml` — declara as dependências do projeto:
   - `selenium` e `chromium` — automação de navegador, abordagem de coleta pretendida para as páginas do IBGE (muitas renderizam conteúdo no lado do cliente).
+- `uv.lock` — arquivo de lock gerado pelo `uv` a partir do `pyproject.toml`, fixando as versões exatas (e hashes) de todas as dependências, diretas e transitivas; mantido em sincronia com o `.venv` via `uv sync` e não deve ser editado manualmente.
 - `fontes/` — diretório com os dados brutos coletados e seus derivados:
   - `*.html.md` — captura bruta da página (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`); entrada para o `extrair_fontes.py`. O HTML é o DOM renderizado, copiado via Ferramentas do desenvolvedor do Chrome (`Elements` → `Copy outerHTML` no `<html>`), não o "ver código-fonte" da página — necessário porque a árvore de pastas é montada em JavaScript no lado do cliente.
   - `*.json` / `*.csv` — saídas geradas manualmente a partir do `.html.md` correspondente via `extrair_fontes.py --formato json|csv > fontes/<nome>.<ext>`; não são geradas automaticamente, então podem ficar desatualizadas em relação ao `.html.md` se este for recapturado.

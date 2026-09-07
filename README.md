@@ -22,6 +22,20 @@ Esse arquivo não é o código-fonte da página (`Ver código-fonte`/`view-sourc
 4. Cole o HTML copiado dentro de um bloco de código \`\`\`html em `fontes/estimativas-de-populacao.html.md`, mantendo o cabeçalho no topo com a `url` de origem e a data de acesso atual em `acessado_em` (formato `AAAA-MM-DD`).
 5. Regenere `fontes/estimativas-de-populacao.json` e `fontes/estimativas-de-populacao.csv` (veja a seção seguinte), já que eles não são atualizados automaticamente.
 
+## Configuração inicial
+
+O ambiente virtual (`.venv`) já está presente no repositório, mas se precisar recriá-lo (ou estiver clonando o repositório pela primeira vez), use o fluxo `uv venv` → `source` → `uv sync`:
+
+```shell
+uv venv
+source .venv/bin/activate
+uv sync
+```
+
+- `uv venv` — cria o `.venv` (usando a versão do Python declarada em `pyproject.toml`, `>=3.14`).
+- `source .venv/bin/activate` — ativa o ambiente virtual na sessão do shell.
+- `uv sync` — instala/atualiza as dependências no `.venv` conforme `pyproject.toml`/`uv.lock`.
+
 ## Execução
 
 ```shell
@@ -29,8 +43,6 @@ source .venv/bin/activate
 python main.py
 python extrair_fontes.py --formato tree   # ou json, csv
 ```
-
-Dependências gerenciadas com `uv` (veja `pyproject.toml`); use `uv sync` para instalar/atualizar o `.venv`.
 
 ## Atualizar os arquivos `json`/`csv` em `fontes/`
 
