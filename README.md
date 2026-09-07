@@ -12,16 +12,6 @@ Ferramenta para coleta de dados públicos do IBGE.
 
 Este repositório usa [Git LFS](https://git-lfs.com) para todo o conteúdo de `datasets/` (`datasets/**` no `.gitattributes`), exceto os `.sha256`, que ficam como blobs normais do Git. Instale o Git LFS (`git lfs install`) antes de clonar ou baixar novos arquivos.
 
-### Atualizar `fontes/estimativas-de-populacao.html.md`
-
-O arquivo guarda o HTML **renderizado** pelo navegador, não o código-fonte (`view-source:`), porque a árvore de pastas é montada em JavaScript:
-
-1. Abra a URL do cabeçalho `url` do arquivo (https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=downloads) no Chrome e aguarde a árvore `Downloads` carregar.
-2. Abra as Ferramentas do desenvolvedor (`⌥⌘I` no macOS, `F12`/`Ctrl+Shift+I` no Windows/Linux), aba **Elements**.
-3. No elemento `<html>`, clique com o botão direito -> **Copy** -> **Copy outerHTML**.
-4. Cole o HTML em um bloco \`\`\`html em `fontes/estimativas-de-populacao.html.md`, atualizando `acessado_em` (formato `AAAA-MM-DD`).
-5. Regenere `fontes/estimativas-de-populacao.json` e `.csv` (seção seguinte), eles não se atualizam sozinhos.
-
 ## Configuração
 
 Crie o `.venv` após clonar o repositório:
@@ -36,20 +26,21 @@ uv sync
 - `source .venv/bin/activate`, ativa o ambiente na sessão do shell.
 - `uv sync`, instala/atualiza dependências conforme `pyproject.toml`/`uv.lock`.
 
-## Execução
+### Atualizar `fontes/estimativas-de-populacao.html.md`
 
-```shell
-source .venv/bin/activate
-python main.py
-python extrair_fontes.py --formato tree   # ou json, csv
-```
+O arquivo guarda o HTML **renderizado** pelo navegador, não o código-fonte (`view-source:`), porque a árvore de pastas é montada em JavaScript:
+
+1. Abra a URL do cabeçalho `url` do arquivo (https://www.ibge.gov.br/estatisticas/sociais/populacao/9103-estimativas-de-populacao.html?=&t=downloads) no Chrome e aguarde a árvore `Downloads` carregar.
+2. Abra as Ferramentas do desenvolvedor (`⌥⌘I` no macOS, `F12`/`Ctrl+Shift+I` no Windows/Linux), aba **Elements**.
+3. No elemento `<html>`, clique com o botão direito -> **Copy** -> **Copy outerHTML**.
+4. Cole o HTML em um bloco \`\`\`html em `fontes/estimativas-de-populacao.html.md`, atualizando `acessado_em` (formato `AAAA-MM-DD`).
+5. Regenere `fontes/estimativas-de-populacao.json` e `.csv` (seção seguinte), eles não se atualizam sozinhos.
 
 ## Atualizar arquivos em fontes/
 
 `fontes/*.json` e `.csv` são derivados do `.html.md` e não se regeneram sozinhos, após recapturar o `.html.md`, refaça a exportação:
 
 ```shell
-source .venv/bin/activate
 python extrair_fontes.py fontes/estimativas-de-populacao.html.md --formato json > fontes/estimativas-de-populacao.json
 python extrair_fontes.py fontes/estimativas-de-populacao.html.md --formato csv > fontes/estimativas-de-populacao.csv
 ```
@@ -59,7 +50,6 @@ python extrair_fontes.py fontes/estimativas-de-populacao.html.md --formato csv >
 `download.py` lê `fontes/estimativas-de-populacao.csv` e baixa os arquivos para `datasets/`, gravando um `.sha256` ao lado de cada um:
 
 ```shell
-source .venv/bin/activate
 python download.py
 ```
 
