@@ -4,15 +4,15 @@ Este arquivo fornece orientações para o Claude Code (claude.ai/code) ao trabal
 
 ## Estado do projeto
 
-Este é um projeto em estágio inicial (scaffold) para coletar dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` contém capturas brutas de páginas (HTML envolvido em Markdown com um cabeçalho de frontmatter `url`/`acessado_em`) obtidas de páginas do IBGE, como a página de estimativas de população — esses são dados de referência/coletados, não código-fonte.
+Este é um projeto em estágio inicial (scaffold) para coletar dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` guarda capturas brutas de páginas do IBGE — dados de referência/coletados, não código-fonte (detalhes em Arquitetura).
 
-Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br). A abordagem é fazer scraping direto do site do IBGE, reproduzindo a navegação/visualização de um visitante humano, como prova de conceito.
+Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br): a coleta é por scraping direto do site do IBGE, como faria um visitante humano, uma prova de conceito.
 
 Este repositório usa Git LFS: o `.gitattributes` rastreia todo o conteúdo de `datasets/` (`datasets/** filter=lfs diff=lfs merge=lfs -text`) — os arquivos baixados pelo `download.py`, de qualquer extensão. Os `.sha256` gravados ao lado de cada arquivo são explicitamente excluídos dessa regra (`*.sha256 !filter !diff !merge !text`), permanecendo como blobs normais do Git.
 
 ## Comandos
 
-Este projeto usa o `uv` para gerenciamento de dependências (Python >=3.14, veja `pyproject.toml` / `uv.lock`), mas a execução deve ser feita através do ambiente virtual (`.venv`) já presente no repositório.
+Dependências gerenciadas com `uv` (Python >=3.14, veja `pyproject.toml`/`uv.lock`); execução sempre via ambiente virtual (`.venv`), criado com `uv venv` e sincronizado com `uv sync`.
 
 - Ativar o ambiente virtual: `source .venv/bin/activate`
 - Executar a aplicação: `python main.py` (com o venv ativado)
@@ -48,8 +48,8 @@ Não execute os scripts criados neste repositório. Em vez disso, forneça o com
 
 ## Manutenção deste arquivo
 
-Mantenha este `CLAUDE.md` atualizado com o estado corrente do repositório. Sempre que scripts, comandos de execução ou a estrutura de arquivos mudarem, atualize as seções correspondentes acima antes de concluir a tarefa.
+Mantenha este `CLAUDE.md` atualizado: sempre que scripts, comandos ou a estrutura de arquivos mudarem, atualize as seções correspondentes antes de concluir a tarefa.
 
 ## Manutenção do README.md
 
-Mantenha o `README.md` atualizado junto com o `CLAUDE.md`. Sempre que um script for criado, renomeado ou tiver seu comando/opções de execução alterados, atualize o `README.md` na mesma tarefa: adicione ou ajuste a seção correspondente com o comando de execução atualizado. O `README.md` é a documentação voltada ao usuário (comandos de execução e fluxos), enquanto o `CLAUDE.md` é o contexto voltado ao Claude Code (arquitetura e convenções) — evite duplicar detalhes de implementação no `README.md`.
+Atualize o `README.md` junto com o `CLAUDE.md`: sempre que um script for criado, renomeado ou tiver comando/opções alterados, ajuste a seção correspondente na mesma tarefa. Divisão de papéis: `README.md` é a documentação de uso (comandos e fluxos, voltada ao usuário); `CLAUDE.md` é o contexto de arquitetura e convenções (voltado ao Claude Code) — evite duplicar detalhes de implementação no `README.md`.
