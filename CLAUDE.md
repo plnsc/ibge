@@ -6,7 +6,7 @@ Este arquivo fornece orientações para o Claude Code (claude.ai/code) ao trabal
 
 Este é um projeto em estágio inicial (scaffold) para coletar dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` guarda capturas brutas de páginas do IBGE — dados de referência/coletados, não código-fonte (detalhes em Arquitetura).
 
-Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br): a coleta é por scraping direto do site do IBGE, como faria um visitante humano, uma prova de conceito.
+Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br): a coleta é feita por scraping direto do site do IBGE, como faria um visitante humano, uma prova de conceito.
 
 Este repositório usa Git LFS: o `.gitattributes` rastreia todo o conteúdo de `datasets/` (`datasets/** filter=lfs diff=lfs merge=lfs -text`) — os arquivos baixados pelo `download.py`, de qualquer extensão. Os `.sha256` gravados ao lado de cada arquivo são explicitamente excluídos dessa regra (`*.sha256 !filter !diff !merge !text`), permanecendo como blobs normais do Git.
 
