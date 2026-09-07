@@ -2,7 +2,7 @@
 
 Ferramenta para coleta de dados públicos do IBGE.
 
-> **Nota:** sem API SIDRA (https://sidra.ibge.gov.br). A coleta é feita por scraping direto do site do IBGE, como faria um visitante humano, uma prova de conceito.
+> **Nota:** Não faz uso da API SIDRA (https://sidra.ibge.gov.br). A coleta é feita por scraping direto do site do IBGE, como faria um visitante humano, uma prova de conceito.
 
 ## Artefatos
 
