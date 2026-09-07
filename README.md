@@ -22,7 +22,7 @@ O arquivo guarda o HTML **renderizado** pelo navegador — não o código-fonte 
 4. Cole o HTML em um bloco \`\`\`html em `fontes/estimativas-de-populacao.html.md`, atualizando `acessado_em` (formato `AAAA-MM-DD`).
 5. Regenere `fontes/estimativas-de-populacao.json` e `.csv` (seção seguinte) — eles não se atualizam sozinhos.
 
-## Configuração inicial
+## Configuração
 
 Crie o `.venv` após clonar o repositório:
 
