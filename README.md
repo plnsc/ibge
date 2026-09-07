@@ -10,6 +10,8 @@ Ferramenta para coleta de dados públicos do IBGE.
 - `fontes/*.json` / `fontes/*.csv` — versões estruturadas, extraídas manualmente do `.html.md` correspondente, listando as pastas e arquivos disponíveis para download no site do IBGE.
 - `datasets/` — pasta de destino dos arquivos baixados do IBGE, com a mesma estrutura de pastas do site de origem; cada arquivo baixado é acompanhado de um `.sha256` para conferência de integridade.
 
+Este repositório usa [Git LFS](https://git-lfs.com) para versionar todo o conteúdo de `datasets/` (`datasets/**` no `.gitattributes`), exceto os arquivos `.sha256`, que são pequenos e ficam como blobs normais do Git. Instale o Git LFS (`git lfs install`) antes de clonar ou baixar novos arquivos, para que eles sejam versionados corretamente em vez de ir direto para o histórico do Git.
+
 ### Atualizar `fontes/estimativas-de-populacao.html.md`
 
 Esse arquivo não é o código-fonte da página (`Ver código-fonte`/`view-source:`), e sim o HTML já renderizado pelo navegador (a página do IBGE monta a árvore de pastas via JavaScript). Para recapturar:

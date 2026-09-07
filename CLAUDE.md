@@ -8,6 +8,8 @@ Este é um projeto em estágio inicial (scaffold) para coletar dados públicos d
 
 Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br). A abordagem é fazer scraping direto do site do IBGE, reproduzindo a navegação/visualização de um visitante humano, como prova de conceito.
 
+Este repositório usa Git LFS: o `.gitattributes` rastreia todo o conteúdo de `datasets/` (`datasets/** filter=lfs diff=lfs merge=lfs -text`) — os arquivos baixados pelo `download.py`, de qualquer extensão. Os `.sha256` gravados ao lado de cada arquivo são explicitamente excluídos dessa regra (`*.sha256 !filter !diff !merge !text`), permanecendo como blobs normais do Git.
+
 ## Comandos
 
 Este projeto usa o `uv` para gerenciamento de dependências (Python >=3.14, veja `pyproject.toml` / `uv.lock`), mas a execução deve ser feita através do ambiente virtual (`.venv`) já presente no repositório.
