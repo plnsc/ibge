@@ -4,7 +4,7 @@ Este arquivo fornece orientações para o Claude Code (claude.ai/code) ao trabal
 
 ## Estado do projeto
 
-Este é um projeto em estágio inicial (scaffold) para coletar dados do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` contém capturas brutas de páginas (HTML envolvido em Markdown com um cabeçalho de frontmatter `url`/`acessado_em`) obtidas de páginas do IBGE, como a página de estimativas de população — esses são dados de referência/coletados, não código-fonte.
+Este é um projeto em estágio inicial (scaffold) para coletar dados públicos do IBGE (Instituto Brasileiro de Geografia e Estatística), https://www.ibge.gov.br. A pasta `fontes/` contém capturas brutas de páginas (HTML envolvido em Markdown com um cabeçalho de frontmatter `url`/`acessado_em`) obtidas de páginas do IBGE, como a página de estimativas de população — esses são dados de referência/coletados, não código-fonte.
 
 Este repositório **não** faz uso da API SIDRA (https://sidra.ibge.gov.br). A abordagem é fazer scraping direto do site do IBGE, reproduzindo a navegação/visualização de um visitante humano, como prova de conceito.
 
@@ -27,7 +27,7 @@ Sempre ative o `.venv` antes de rodar comandos Python diretamente (`python`, `pi
   - `selenium` e `chromium` — automação de navegador, abordagem de coleta pretendida para as páginas do IBGE (muitas renderizam conteúdo no lado do cliente).
   - `pandas` — usado pelo `listar_extensoes.py`.
 - `fontes/` — diretório com os dados brutos coletados e seus derivados:
-  - `*.html.md` — captura bruta da página (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`); entrada para o `extrair_fontes.py`.
+  - `*.html.md` — captura bruta da página (HTML dentro de um bloco de código em um arquivo Markdown, com um pequeno frontmatter estilo YAML registrando a `url` de origem e o timestamp de acesso `acessado_em`); entrada para o `extrair_fontes.py`. O HTML é o DOM renderizado, copiado via Ferramentas do desenvolvedor do Chrome (`Elements` → `Copy outerHTML` no `<html>`), não o "ver código-fonte" da página — necessário porque a árvore de pastas é montada em JavaScript no lado do cliente.
   - `*.json` / `*.csv` — saídas geradas manualmente a partir do `.html.md` correspondente via `extrair_fontes.py --formato json|csv > fontes/<nome>.<ext>`; não são geradas automaticamente, então podem ficar desatualizadas em relação ao `.html.md` se este for recapturado.
 - `download.py` — lê `fontes/estimativas-de-populacao.csv` (colunas `caminho,nome,tipo,url` geradas pelo `extrair_fontes.py`) e baixa todos os arquivos, replicando a árvore em `datasets/`:
   - percorre as pastas `Estimativas_de_Populacao/Estimativas_*` de baixo para cima (mais recente primeiro) e os arquivos de cada pasta de cima para baixo;
