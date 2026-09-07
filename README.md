@@ -52,12 +52,3 @@ python download.py
 ```
 
 Roda sequencialmente (um arquivo por vez, pastas mais recentes primeiro), pula arquivos já baixados, tenta cada download até 3 vezes e para a execução se todas as tentativas falharem. Ajuste as pausas com `--pausa-pastas` e `--pausa-arquivos`, e o destino com `--destino`.
-
-## Contar extensões de arquivo
-
-`listar_extensoes.py` lê `fontes/estimativas-de-populacao.csv` e imprime no stdout a contagem de cada extensão de arquivo (`.pdf`, `.zip`, etc.), da mais para a menos frequente:
-
-```shell
-source .venv/bin/activate
-python listar_extensoes.py
-```
