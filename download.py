@@ -18,7 +18,7 @@ PADRAO_PASTA_ANO = re.compile(r"^Estimativas_de_Populacao/Estimativas_[^/]+$")
 MAX_TENTATIVAS = 3
 TIMEOUT_REQUISICAO = 60
 TAMANHO_BLOCO = 64 * 1024
-USER_AGENT = "Mozilla/5.0 (compatible; ibge-download-script/1.0)"
+USER_AGENT = "Mozilla/5.0 (compatible; ibge-dados-publicos-script/1.0)"
 
 
 def ler_linhas(caminho_csv: Path) -> list[dict]:
