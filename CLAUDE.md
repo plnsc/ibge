@@ -33,7 +33,7 @@ Sempre ative o `.venv` antes de rodar comandos Python diretamente (`python`, `pi
   - `*.json` / `*.csv` — saídas geradas manualmente a partir do `.html.md` correspondente via `extrair_fontes.py --formato json|csv > fontes/<nome>.<ext>`; não são geradas automaticamente, então podem ficar desatualizadas em relação ao `.html.md` se este for recapturado.
 - `download.py` — lê `fontes/estimativas-de-populacao.csv` (colunas `caminho,nome,tipo,url` geradas pelo `extrair_fontes.py`) e baixa todos os arquivos, replicando a árvore em `datasets/`:
   - percorre as pastas `Estimativas_de_Populacao/Estimativas_*` de baixo para cima (mais recente primeiro) e os arquivos de cada pasta de cima para baixo;
-  - baixa um arquivo por vez, com pausa maior entre pastas e menor entre arquivos (`--pausa-pastas`/`--pausa-arquivos`);
+  - baixa um arquivo por vez, com uma pausa entre downloads (`--pausa`, padrão 3s);
   - pula arquivos já existentes;
   - tenta cada download até 3 vezes e **para a execução** se todas falharem;
   - grava um `.sha256` ao lado de cada arquivo.

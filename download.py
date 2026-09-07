@@ -82,8 +82,13 @@ def baixar_com_retentativas(url: str, destino: Path) -> None:
             return
         except (urllib.error.URLError, OSError) as erro:
             ultimo_erro = erro
-            print(f"    tentativa {tentativa}/{MAX_TENTATIVAS} falhou: {erro}", file=sys.stderr)
-    raise RuntimeError(f"falha ao baixar {url} apos {MAX_TENTATIVAS} tentativas") from ultimo_erro
+            print(
+                f"    tentativa {tentativa}/{MAX_TENTATIVAS} falhou: {erro}",
+                file=sys.stderr,
+            )
+    raise RuntimeError(
+        f"falha ao baixar {url} apos {MAX_TENTATIVAS} tentativas"
+    ) from ultimo_erro
 
 
 def processar_arquivo(linha: dict, diretorio_destino: Path) -> None:
@@ -103,8 +108,7 @@ def processar_arquivo(linha: dict, diretorio_destino: Path) -> None:
 def executar(
     linhas: list[dict],
     diretorio_destino: Path,
-    pausa_pastas: float,
-    pausa_arquivos: float,
+    pausa: float,
 ) -> None:
     blocos = agrupar_por_pasta_ano(linhas)
     blocos.reverse()  # entra nos nos Estimativas_* de baixo para cima
@@ -120,10 +124,10 @@ def executar(
                 print(f"Erro fatal: {erro}", file=sys.stderr)
                 sys.exit(1)
             if indice_filho < len(filhos) - 1:
-                time.sleep(pausa_arquivos)
+                time.sleep(pausa)
 
         if indice_bloco < len(blocos) - 1:
-            time.sleep(pausa_pastas)
+            time.sleep(pausa)
 
 
 def parse_args() -> argparse.Namespace:
@@ -144,16 +148,10 @@ def parse_args() -> argparse.Namespace:
         help=f"Diretorio onde a arvore sera replicada (padrao: {DIRETORIO_DESTINO_PADRAO})",
     )
     parser.add_argument(
-        "--pausa-pastas",
+        "--pausa",
         type=float,
-        default=5.0,
-        help="Pausa em segundos entre pastas Estimativas_* (padrao: %(default)s)",
-    )
-    parser.add_argument(
-        "--pausa-arquivos",
-        type=float,
-        default=1.0,
-        help="Pausa em segundos entre arquivos de uma mesma pasta (padrao: %(default)s)",
+        default=3.0,
+        help="Pausa em segundos entre downloads  (padrao: %(default)s)",
     )
     return parser.parse_args()
 
@@ -161,7 +159,7 @@ def parse_args() -> argparse.Namespace:
 def main():
     args = parse_args()
     linhas = ler_linhas(args.csv)
-    executar(linhas, args.destino, args.pausa_pastas, args.pausa_arquivos)
+    executar(linhas, args.destino, args.pausa)
 
 
 if __name__ == "__main__":

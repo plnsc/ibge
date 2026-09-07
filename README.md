@@ -65,4 +65,4 @@ python download.py
 
 - Ordem: pastas mais recentes primeiro, arquivos de cada pasta em sequência.
 - Pula arquivos já baixados; tenta cada um até 3 vezes; para a execução se todas falharem.
-- Flags: `--pausa-pastas`, `--pausa-arquivos`, `--destino`.
+- Flags: `--pausa` (padrão: 3s), `--destino`.
