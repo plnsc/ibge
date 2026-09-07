@@ -26,7 +26,7 @@ uv sync
 - `source .venv/bin/activate`, ativa o ambiente na sessão do shell.
 - `uv sync`, instala/atualiza dependências conforme `pyproject.toml`/`uv.lock`.
 
-### Atualizar `fontes/estimativas-de-populacao.html.md`
+## Atualizar `fontes/estimativas-de-populacao.html.md`
 
 O arquivo guarda o HTML **renderizado** pelo navegador, não o código-fonte (`view-source:`), porque a árvore de pastas é montada em JavaScript:
 
@@ -34,11 +34,11 @@ O arquivo guarda o HTML **renderizado** pelo navegador, não o código-fonte (`v
 2. Abra as Ferramentas do desenvolvedor (`⌥⌘I` no macOS, `F12`/`Ctrl+Shift+I` no Windows/Linux), aba **Elements**.
 3. No elemento `<html>`, clique com o botão direito -> **Copy** -> **Copy outerHTML**.
 4. Cole o HTML em um bloco \`\`\`html em `fontes/estimativas-de-populacao.html.md`, atualizando `acessado_em` (formato `AAAA-MM-DD`).
-5. Regenere `fontes/estimativas-de-populacao.json` e `.csv` (seção seguinte), eles não se atualizam sozinhos.
+5. Exporte novamente `fontes/estimativas-de-populacao.json` e `.csv` (seção seguinte), eles não se atualizam sozinhos.
 
 ## Atualizar arquivos em fontes/
 
-`fontes/*.json` e `.csv` são derivados do `.html.md` e não se regeneram sozinhos, após recapturar o `.html.md`, refaça a exportação:
+`fontes/*.json` e `.csv` são derivados do `.html.md` e não se atualizam sozinhos, após recapturar o `.html.md`, refaça a exportação:
 
 ```shell
 python extrair_fontes.py fontes/estimativas-de-populacao.html.md --formato json > fontes/estimativas-de-populacao.json
@@ -54,5 +54,5 @@ python download.py
 ```
 
 - Ordem: pastas mais recentes primeiro, arquivos de cada pasta em sequência.
-- Pula arquivos já baixados; tenta cada um até 3 vezes; para a execução se todas falharem.
+- Pula arquivos já baixados, tenta cada um até 3 vezes, para a execução se todas falharem.
 - Flags: `--pausa` (padrão: 3s), `--destino`.
