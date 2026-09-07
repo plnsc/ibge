@@ -1,4 +1,4 @@
-"""Conta as extensões de arquivo presentes em um CSV gerado pelo gerar_fontes.py."""
+"""Conta as extensões de arquivo presentes em um CSV gerado pelo extrair_fontes.py."""
 
 import argparse
 from pathlib import Path
@@ -17,7 +17,7 @@ def extrair_extensoes(caminho_csv: Path) -> pd.Series:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Conta as extensoes de arquivo presentes em um CSV do gerar_fontes.py."
+        description="Conta as extensoes de arquivo presentes em um CSV do extrair_fontes.py."
     )
     parser.add_argument(
         "csv",

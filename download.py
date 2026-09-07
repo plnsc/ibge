@@ -12,7 +12,7 @@ import urllib.request
 from pathlib import Path
 
 ARQUIVO_CSV_PADRAO = Path(__file__).with_name("fontes") / "estimativas-de-populacao.csv"
-DIRETORIO_DESTINO_PADRAO = Path(__file__).with_name("downloads")
+DIRETORIO_DESTINO_PADRAO = Path(__file__).with_name("datasets")
 
 PADRAO_PASTA_ANO = re.compile(r"^Estimativas_de_Populacao/Estimativas_[^/]+$")
 MAX_TENTATIVAS = 3
@@ -128,7 +128,7 @@ def executar(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Baixa os arquivos da arvore do IBGE listados em um CSV gerado pelo gerar_fontes.py."
+        description="Baixa os arquivos da arvore do IBGE listados em um CSV gerado pelo extrair_fontes.py."
     )
     parser.add_argument(
         "csv",
